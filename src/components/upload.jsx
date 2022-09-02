@@ -17,7 +17,7 @@ const upload = () => {
         <Button size="large" danger icon={<UploadOutlined />}>Upload</Button>
       </Upload>
       <br></br>
-      <Button size="large" type="primary" danger>Solicitar Permiso</Button>
+      <Button size="large" type="primary" danger>Solicitar</Button>
     </>
     
   )

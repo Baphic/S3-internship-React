@@ -25,8 +25,8 @@ body{
 }
 
 .page-header { 
-  background-image: linear-gradient(to right, #151515c1, #151515c1), 
-  url("https://images.unsplash.com/photo-1484557052118-f32bd25b45b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80");
+  background-image: linear-gradient(to right, #0c1e6e47, #199a8b61), 
+  url("https://images.unsplash.com/photo-1524234107056-1c1f48f64ab8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
   position: relative;
   display:flex;
   justify-content: center;
@@ -34,6 +34,7 @@ body{
   height: 600px;
   object-fit: contain;
   background-size: cover;
+  border-radius: 0px 0px 230px 230px;
 }
 
 .page-caption { 
@@ -65,7 +66,7 @@ body{
   padding: 30px 30px;
   font-family: 'Poppins', sans-serif;
   margin: 50px auto;
-  background-image: url("../../assets/img/patron3.png");
+  background-color: #F5F5F5;
   box-shadow: 0px 30px 40px -20px #A3A5AE;
   width: 80%;
   border-radius: 10px;
