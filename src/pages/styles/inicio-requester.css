@@ -21,6 +21,9 @@ body{
   border-top: 3px solid #FCAF4A;
 }
 .cyan {
+  border-top: 3px solid #45D3D3;
+}
+.cyan-general {
   border-top: 6px solid #45D3D3;
 }
 

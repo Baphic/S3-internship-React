@@ -10,3 +10,23 @@
 .boton-lista-solicitud{
     margin: 20px 6px;
 }
+
+.encabezado-lista-aprobados {
+    background-color: #78a7ffb3;
+    font-size: 16px;
+}
+
+.encabezado-lista-denegados {
+    background-color: #ff7878a8;
+    font-size: 16px;
+}
+
+.button-historial {
+    background-color: #1fbbbb;
+    border-color: #1fbbbb;
+}
+
+.button-historial:hover {
+    background-color: #45D3D3;
+    border-color: #45D3D3;
+}
