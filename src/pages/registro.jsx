@@ -1,11 +1,48 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import "./styles/registro.css";
 import { Button, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import { LockOutlined, UserOutlined,MailOutlined } from "@ant-design/icons";
-import Password from "antd/lib/input/Password";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Registro = () => {
+
+  let navigate = useNavigate();
+
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [usuario, setUsuario] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const registro = ()=>{
+    let parametrosRegistro = {
+      nombre: nombre,
+      apellido: apellido,
+      usuario: usuario,
+      email: email,
+      password: password
+    }
+
+    axios.post('/api/registro',parametrosRegistro).then((res)=>{
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Usuario registrado correctamente',
+      })
+      navigate("/")
+    }).catch((error)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Algo salio mal',
+        text: error.error.mensaje,
+      })
+    })
+
+  }
+
   return (
     <>
       <div className="contenedorBase">
@@ -28,6 +65,10 @@ const Registro = () => {
                 />
                 <Form.Item
                   name="name"
+                  value={nombre}
+                  onChange={(e)=>{
+                    setNombre(e.target.value)
+                  }}
                   rules={[
                     {
                       required: true,
@@ -39,6 +80,10 @@ const Registro = () => {
                 </Form.Item>
                 <Form.Item
                   name="last"
+                  value = {apellido}
+                  onChange={(e)=>{
+                    setApellido(e.target.value)
+                  }}
                   rules={[
                     {
                       required: true,
@@ -50,6 +95,10 @@ const Registro = () => {
                 </Form.Item>
                 <Form.Item
                   name="email"
+                  value = {email}
+                  onChange={(e)=>{
+                    setEmail(e.target.value)
+                  }}
                   rules={[
                     {
                       required: true,
@@ -58,10 +107,14 @@ const Registro = () => {
                     },
                   ]}
                 >
-                  <Password prefix={<MailOutlined style={{color:'#BEBEBE'}}/>} placeholder="Correo Electronico" size="large"/>
+                  <Input prefix={<MailOutlined style={{color:'#BEBEBE'}}/>} placeholder="Correo Electronico" size="large"/>
                 </Form.Item>
                 <Form.Item
                   name="username"
+                  value = {usuario}
+                  onChange={(e)=>{
+                    setUsuario(e.target.value)
+                  }}
                   rules={[
                     {
                       required: true,
@@ -73,6 +126,10 @@ const Registro = () => {
                 </Form.Item>
                 <Form.Item
                   name="password"
+                  value = {password}
+                  onChange={(e)=>{
+                    setPassword(e.target.value)
+                  }}
                   rules={[
                     {
                       required: true,
@@ -84,7 +141,7 @@ const Registro = () => {
                 </Form.Item>
                 <br></br>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit" block size="large" className="btn-sub">
+                  <Button type="primary" htmlType="submit" onClick={registro} block size="large" className="btn-sub">
                     Registrarse
                   </Button>
                 </Form.Item>

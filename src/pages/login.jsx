@@ -1,64 +1,123 @@
-import './styles/login.css';
-import { Form, Input, Button, Checkbox} from 'antd';
-import 'antd/dist/antd.css'; 
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import "./styles/login.css";
+import axios from "axios";
+import React, { useState } from "react";
+import { Form, Input, Button, Checkbox } from "antd";
+import "antd/dist/antd.css";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const {Item}  = Form;
-const {Password} = Input;
+const { Item } = Form;
+const { Password } = Input;
 
 const Login = () => {
+
+  let navigate = useNavigate();
+
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = ()=>{
+    let parametrosLogin = {
+      usuario: usuario,
+      password: password,
+      Token:'true'
+    }
+    axios.post("/api/login",parametrosLogin).then((res)=>{
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'success',
+        title: 'Cuenta activa'
+      })
+      navigate('inicio-requester');
+    }).catch((error)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Algo salio mal',
+        text: error.error.mensaje,
+      })
+    })
+  }
+
+
   return (
     <div className="contenedor-principal">
       <div className="contenedor-secundario">
-      <Form name="formulario" initialValues={{recordar:true}}
-      >
-        <img className="imagen-principal" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="imagen-login"/>
-        <Item 
-          name="username" 
-          rules={[{
-            required: true,
-            message: "Debe ingresar el nombre de usuario"
-          }]}
-        >
-          <Input prefix={<UserOutlined style={{color:'#BEBEBE'}}/>} placeholder="Usuario" size="large"/>
+        <Form name="formulario" initialValues={{ recordar: true }}>
+          <img
+            className="imagen-principal"
+            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
+            alt="imagen-login"
+          />
+          <Item
+            name="username"
+            value={usuario}
+            onChange={(e)=>{
+              setUsuario(e.target.value)
+            }}
+            rules={[
+              {
+                required: true,
+                message: "Debe ingresar el nombre de usuario",
+              },
+            ]}
+          >
+            <Input
+              prefix={<UserOutlined style={{ color: "#BEBEBE" }} />}
+              placeholder="Usuario"
+              size="large"
+            />
+          </Item>
 
-        </Item>
+          <Item
+            name="password"
+            value={password}
+            onChange={(e)=>{
+              setPassword(e.target.value)
+            }}
+            rules={[
+              {
+                required: true,
+                message: "Debe ingresar la contraseña",
+              },
+            ]}
+          >
+            <Password
+              prefix={<LockOutlined style={{ color: "#BEBEBE" }} />}
+              placeholder="Contraseña"
+              size="large"
+            />
+          </Item>
 
+          <Item name="recordar" valuePropName="checked">
+            <Checkbox danger>Recordar Ususario</Checkbox>
+          </Item>
 
-        <Item 
-          name="password" 
-          rules={[{
-            required: true,
-            message: "Debe ingresar la contraseña"
-          }]}
-        >
-          <Password prefix={<LockOutlined  style={{color:'#BEBEBE'}}/>} placeholder="Contraseña" size="large"/>
-          
-        </Item>
+          <Item>
+            <Button type="primary" htmlType="submit" block size="large" onClick={login}>
+              Iniciar Sesión
+            </Button>
+          </Item>
 
-
-        <Item name="recordar" valuePropName="checked">
-          <Checkbox danger>
-            Recordar Ususario
-          </Checkbox>
-        </Item>
-
-
-        <Item>
-          <Button type="primary" htmlType="submit" block size="large">
-            Iniciar Sesión
-          </Button>
-        </Item>
-
-
-        <Item>
-          <p>O <a href="/registro">registrate ahora!</a></p>
-        </Item>
-
-      </Form>
+          <Item>
+            <p>
+              O <a href="/registro">registrate ahora!</a>
+            </p>
+          </Item>
+        </Form>
       </div>
     </div>
   );
-}
+};
 
 export default Login;
