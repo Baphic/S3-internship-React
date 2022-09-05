@@ -6,12 +6,12 @@ import ListFiles from '../components/list-files'
 const Inicio = () => {
     return (
         <div className="general">
-            <div class="page-header">
-                <div class="page-caption">
-                    <h1 class="page-title">Bucket internship-project-21</h1>
+            <div className="page-header">
+                <div className="page-caption">
+                    <h1 className="page-title">Bucket internship-project-21</h1>
                 </div>
             </div>
-            <div class="page-body cyan">
+            <div className="page-body cyan">
                 <div className="contenedor con-select blue">
                     <div className="contenido">
                         <h2>Directorio</h2>

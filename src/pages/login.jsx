@@ -2,7 +2,7 @@ import "./styles/login.css";
 import axios from "axios";
 import React, { useState } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -100,7 +100,7 @@ const Login = () => {
           </Item>
 
           <Item name="recordar" valuePropName="checked">
-            <Checkbox danger>Recordar Ususario</Checkbox>
+            <Checkbox danger>Recordar Usuario</Checkbox>
           </Item>
 
           <Item>

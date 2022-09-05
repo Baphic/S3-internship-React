@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import "./styles/registro.css";
 import { Button, Form, Input } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { LockOutlined, UserOutlined,MailOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
