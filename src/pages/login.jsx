@@ -6,49 +6,64 @@ import "antd/dist/antd.min.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Token } from "./token";
+import { Storage } from "./identidad";
 
 const { Item } = Form;
 const { Password } = Input;
 
 const Login = () => {
 
+  localStorage.clear();
+
   let navigate = useNavigate();
 
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = Token("token", "");
+  const [identidad, setIdentidad] = Storage("identity", "");
 
-  const login = ()=>{
+  const login = () => {
     let parametrosLogin = {
       usuario: usuario,
       password: password,
-      Token:'true'
-    }
-    axios.post("/api/login",parametrosLogin).then((res)=>{
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+      Token: "true",
+    };
+
+    axios
+      .post("api/login", parametrosLogin)
+      .then((res) => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Bienvenido "+res.data.usuarioEncontrado.usuario,
+        });
+        setToken(res.data.token);
+        setIdentidad(res.data.usuarioEncontrado);
+        if (res.data.usuarioEncontrado.rol === "Admin") {
+          navigate("/inicio-admin");
+        } else if (res.data.usuarioEncontrado.rol === "Requester") {
+          navigate("/inicio-requester");
         }
       })
-      Toast.fire({
-        icon: 'success',
-        title: 'Cuenta activa'
-      })
-      navigate('inicio-requester');
-    }).catch((error)=>{
-      Swal.fire({
-        icon: 'error',
-        title: 'Algo salio mal',
-        text: error.error.mensaje,
-      })
-    })
-  }
-
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Algo salio mal",
+          text: error.error.mensaje,
+        });
+      });
+  };
 
   return (
     <div className="contenedor-principal">
@@ -62,8 +77,8 @@ const Login = () => {
           <Item
             name="username"
             value={usuario}
-            onChange={(e)=>{
-              setUsuario(e.target.value)
+            onChange={(e) => {
+              setUsuario(e.target.value);
             }}
             rules={[
               {
@@ -82,8 +97,8 @@ const Login = () => {
           <Item
             name="password"
             value={password}
-            onChange={(e)=>{
-              setPassword(e.target.value)
+            onChange={(e) => {
+              setPassword(e.target.value);
             }}
             rules={[
               {
@@ -99,12 +114,14 @@ const Login = () => {
             />
           </Item>
 
-          <Item name="recordar" valuePropName="checked">
-            <Checkbox danger>Recordar Usuario</Checkbox>
-          </Item>
-
           <Item>
-            <Button type="primary" htmlType="submit" block size="large" onClick={login}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              size="large"
+              onClick={login}
+            >
               Iniciar Sesión
             </Button>
           </Item>
