@@ -145,6 +145,11 @@ const Registro = () => {
                     Registrarse
                   </Button>
                 </Form.Item>
+                <Form.Item>
+                  <p>
+                   <h3><a href="/">Ya tienes una cuenta?</a></h3>
+                  </p>
+                </Form.Item>
               </Form>
             </div>
           </div>
