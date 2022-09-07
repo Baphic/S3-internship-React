@@ -31,7 +31,7 @@ const Login = () => {
     };
 
     axios
-      .post("api/login", parametrosLogin)
+      .post("/api/login", parametrosLogin)
       .then((res) => {
         const Toast = Swal.mixin({
           toast: true,
@@ -60,7 +60,7 @@ const Login = () => {
         Swal.fire({
           icon: "error",
           title: "Algo salio mal",
-          text: error.error.mensaje,
+          text: "Ocurrio un error",
         });
       });
   };
