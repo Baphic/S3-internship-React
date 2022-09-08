@@ -2,8 +2,18 @@ import './styles/inicio-requester.css';
 import Select from '../components/select-directorios'
 import Upload from '../components/upload'
 import ListFiles from '../components/list-files'
+import { Navigate } from 'react-router-dom';
 
 const Inicio = () => {
+
+    let identidad = JSON.parse(localStorage.getItem('identity'));
+
+    if(identidad.rol !== 'Requester'){
+        return (
+
+            <Navigate to={'/'} />
+        )
+    }
     return (
         <div className="general">
             <div className="page-header">

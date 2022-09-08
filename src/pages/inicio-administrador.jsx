@@ -3,8 +3,16 @@ import SelectSolicitud from '../components/select-solicitudes'
 import DownloadFiles from '../components/download-files'
 import ListFilesSolicitud from '../components/list-solicitud-files'
 import BotonHistoriales from '../components/button-historiales'
+import { useNavigate, Navigate } from "react-router-dom";
 
 const InicioAdministrador = () => {
+
+    let identidad = JSON.parse(localStorage.getItem('identity'));
+    if(identidad.rol !== 'Admin'){
+        return (
+            <Navigate to={'/'} />
+        )
+    }
     return (
         <div className="general">
             <div className="page-header">

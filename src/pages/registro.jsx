@@ -37,7 +37,7 @@ const Registro = () => {
       Swal.fire({
         icon: 'error',
         title: 'Algo salio mal',
-        text: error.error.mensaje,
+        text: error.response.data.mensaje,
       })
     })
 

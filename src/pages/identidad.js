@@ -4,7 +4,7 @@ export const Storage = (key,initialValue)=>{
     const [storageValue, setStorageValue] = useState(()=>{
         try {
             const item = localStorage.getItem(key);
-            return item ? JSON.parse(item) : initialValue
+            return item ? JSON.stringify(item) : initialValue
         } catch (error) {
             return initialValue;
         }
