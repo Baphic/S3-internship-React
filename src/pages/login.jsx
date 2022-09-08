@@ -46,21 +46,23 @@ const Login = () => {
         });
         Toast.fire({
           icon: "success",
-          title: "Bienvenido "+res.data.usuarioEncontrado.usuario,
+          title: "Bienvenido "+res.data.infoUser.usuario,
         });
         setToken(res.data.token);
-        setIdentidad(res.data.usuarioEncontrado);
-        if (res.data.usuarioEncontrado.rol === "Admin") {
+        setIdentidad(res.data.infoUser);
+        if (res.data.infoUser.rol === "Admin") {
+          console.log(identidad)
           navigate("/inicio-admin");
-        } else if (res.data.usuarioEncontrado.rol === "Requester") {
+        } else if (res.data.infoUser.rol === "Requester") {
           navigate("/inicio-requester");
         }
       })
       .catch((error) => {
+        console.log(error)
         Swal.fire({
           icon: "error",
           title: "Algo salio mal",
-          text: "Ocurrio un error",
+          text: error.response.data.mensaje
         });
       });
   };
