@@ -1,32 +1,51 @@
 import { Select } from 'antd';
-const { Option } = Select;
-
-const onChange = (value) => {
-    console.log(`selected ${value}`);
-};
+import axios from "axios";
+import {useState, useEffect} from 'react';
   
 const onSearch = (value) => {
     console.log('search:', value);
 };
 
-const select = () => {
+const Selector = ({setDirectorio}) => {
+
+  const [values, setValues]=useState([]);
+
+  const obtenerDirectorios=async()=>{
+    const {data}= await axios.get('/api/listDataBucket');
+    setValues(data.Data);
+  }
+
+  const onChange = (value) => {
+    setDirectorio(value);
+  };
+
+  useEffect(()=>{
+    obtenerDirectorios();
+  },[])
+
   return (
-    <Select 
-        size="large"
-        showSearch
-        placeholder="Seleecciona un directorio"
-        optionFilterProp="children"
-        style={{
-            width: '100%'
-          }}
-        onChange={onChange}
-        onSearch={onSearch}
-        filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}>
-        <Option value="carpeta1">Carpeta 1</Option>
-        <Option value="carpeta2">Carpeta 2</Option>
-        <Option value="carpeta3">Carpeta 3</Option>
-    </Select>
+    <>
+      {values.length > 0 ?
+
+        <Select
+          size="large"
+          showSearch
+          placeholder="Seleecciona un directorio"
+          optionFilterProp="children"
+          style={{
+              width: '100%'
+            }}
+          onChange={onChange}
+          onSearch={onSearch}
+          filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}>  
+          {values.map((directorio)=><Select.Option value={directorio.Prefix} key={directorio.Prefix}>{directorio.Prefix}</Select.Option>)}
+        </Select>
+
+      : <p>Cargando...</p>
+      }
+    </>
+  
   )
 }
 
-export default select;
+export default Selector;

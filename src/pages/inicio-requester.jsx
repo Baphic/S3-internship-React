@@ -3,10 +3,13 @@ import Select from '../components/select-directorios'
 import Upload from '../components/upload'
 import ListFiles from '../components/list-files'
 import { Navigate } from 'react-router-dom';
+import {useState} from 'react';
 
 const Inicio = () => {
 
     let identidad = JSON.parse(localStorage.getItem('identity'));
+
+    const [directorio, setDirectorio] = useState("");
 
     if(identidad.rol !== 'Requester'){
         return (
@@ -26,14 +29,14 @@ const Inicio = () => {
                     <div className="contenido">
                         <h2>Directorio</h2>
                         <p>Mira el listado y selecciona el directorio al que deseas entrar para subir o ver archivos.</p>
-                        <Select/>
+                        <Select setDirectorio={setDirectorio}/>
                     </div>
                 </div>
                 <div className="contenedor con-download orange">
                     <div className="contenido">
                         <h2>Archivos</h2>
                         <p>Mira el listado de los archivos que se encuentran en el directorio seleccionado.</p>
-                        <ListFiles/>
+                        <ListFiles directorio={directorio}/>
                     </div>
                 </div>     
                 <div className="contenedor con-upload red">
