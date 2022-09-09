@@ -46,7 +46,7 @@ const Login = () => {
         });
         Toast.fire({
           icon: "success",
-          title: "Bienvenido "+res.data.infoUser.usuario,
+          title: "Bienvenido "+res.data.infoUser.nombre+" "+res.data.infoUser.apellido,
         });
         setToken(res.data.token);
         setIdentidad(res.data.infoUser);
