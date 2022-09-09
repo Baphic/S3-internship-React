@@ -1,23 +1,36 @@
 import { List} from 'antd';
+import {useState, useEffect} from 'react';
+import axios from "axios";
 import '../../src/App.css'
 
-const data = [
-  'archivo_1',
-  'archivo_2',
-  'archivo_3',
-  'archivo_4',
-  'archivo_5',
-];
+const ListFiles = ({directorio}) => {
 
-const listFiles = () => {
+  const [datos, setDatos]=useState([]);
+
+  const obtenerDatos=async()=>{
+    const {data}= await axios.get(`/api/listDataDirectorioBucket/${directorio}`);
+    setDatos(data.Data);
+  }
+
+  useEffect(()=>{
+    obtenerDatos();
+  },[])
+
+
   return (
-    <List className="encabezado-lista"
-      header={<div>Archivos del directorio:</div>}
-      bordered
-      dataSource={data}
-      renderItem={(item) => <List.Item className="listado">{item}</List.Item>}
-    />
+    <>
+      {datos.length > 0 ?
+
+        <List className="encabezado-lista"
+          header={<div>Archivos del directorio:</div>}
+          bordered
+          dataSource={datos}
+          renderItem={(item) => <List.Item className="listado">{item.Key}</List.Item>}
+        />
+      : <p>Cargando...</p>
+      }
+    </>
   )
 }
 
-export default listFiles;
+export default ListFiles;

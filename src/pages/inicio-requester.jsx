@@ -1,7 +1,9 @@
+
 import "./styles/inicio-requester.css";
 import Select from "../components/select-directorios";
 import UploadData from "../components/upload";
 import ListFiles from "../components/list-files";
+import {useState} from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import { Button, Typography } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
@@ -11,6 +13,7 @@ const { Text } = Typography;
 const Inicio = () => {
   let identidad = JSON.parse(localStorage.getItem("identity"));
   let navigate = useNavigate();
+  const [directorio, setDirectorio] = useState("");
 
   if (identidad.rol !== "Requester") {
     return <Navigate to={"/"} />;
@@ -43,7 +46,7 @@ const Inicio = () => {
               Mira el listado y selecciona el directorio al que deseas entrar
               para subir o ver archivos.
             </p>
-            <Select />
+            <Select setDirectorio={setDirectorio}/>
           </div>
         </div>
         <div className="contenedor con-download orange">
@@ -53,7 +56,7 @@ const Inicio = () => {
               Mira el listado de los archivos que se encuentran en el directorio
               seleccionado.
             </p>
-            <ListFiles />
+            <ListFiles directorio={directorio}/>
           </div>
         </div>
         <div className="contenedor con-upload red">
