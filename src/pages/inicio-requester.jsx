@@ -1,6 +1,6 @@
 
 import "./styles/inicio-requester.css";
-import Select from "../components/select-directorios";
+import Selector from "../components/select-directorios";
 import UploadData from "../components/upload";
 import ListFiles from "../components/list-files";
 import {useState} from 'react';
@@ -46,7 +46,7 @@ const Inicio = () => {
               Mira el listado y selecciona el directorio al que deseas entrar
               para subir o ver archivos.
             </p>
-            <Select setDirectorio={setDirectorio}/>
+            <Selector setDirectorio={setDirectorio}/>
           </div>
         </div>
         <div className="contenedor con-download orange">

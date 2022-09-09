@@ -1,14 +1,18 @@
 import "./styles/inicio-requester.css";
-import SelectSolicitud from "../components/select-solicitudes";
+import SelectSolicitudes from "../components/select-solicitudes";
 import DownloadFiles from "../components/download-files";
 import ListFilesSolicitud from "../components/list-solicitud-files";
-import BotonHistoriales from "../components/button-historiales";
+import ButtonHistorial from "../components/button-historiales";
 import { useNavigate, Navigate } from "react-router-dom";
-import { Button, Typography } from "antd";
+import { Typography } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
+import {useState} from 'react';
 const { Text } = Typography;
 
 const InicioAdministrador = () => {
+
+  const [solicitud, setSolicitud] = useState("");
+
   let identidad = JSON.parse(localStorage.getItem("identity"));
   let navigate = useNavigate();
   if (identidad.rol !== "Admin") {
@@ -35,22 +39,27 @@ const InicioAdministrador = () => {
         </div>
       </div>
       <div className="page-body cyan-general">
-        <div className="contenedor con-select red">
+        <div className="contenedor con-select orange">
           <div className="contenido">
             <h2>Solicitud</h2>
             <p>
-              Mira el listado y selecciona una solicitud para poder ver los
-              datos que contiene y decide aprobarla o denegarla.
+              Mira el listado y selecciona una solicitud para poder aprobarla o denegarla.
             </p>
-            <SelectSolicitud />
+            <SelectSolicitudes setSolicitud={setSolicitud}/>
           </div>
         </div>
-        <div className="contenedor con-download orange">
+        <div className="contenedor con-upload blue">
           <div className="contenido">
-            <h2>Datos</h2>
+            <h2>Descarga de Archivos</h2>
+            <p>Descarga el archivo de la solicitud para poder verlo.</p>
+            <DownloadFiles />
+          </div>
+        </div>
+        <div className="contenedor con-download red">
+          <div className="contenido">
+            <h2>Aprobar o Denegar</h2>
             <p>
-              Mira el listado de los datos que se encuentran en la solicitud
-              seleccionada.
+              Decide si aprobar o denegar la solicitud para subir los archivos.
             </p>
             <ListFilesSolicitud />
           </div>
@@ -61,14 +70,7 @@ const InicioAdministrador = () => {
             <p>
               Mira los historiales de los datos que has aprobado y denegado.
             </p>
-            <BotonHistoriales />
-          </div>
-        </div>
-        <div className="contenedor con-upload blue">
-          <div className="contenido">
-            <h2>Descarga de Archivos</h2>
-            <p>Selecciona y descarga el archivo que desees de la solicitud.</p>
-            <DownloadFiles />
+            <ButtonHistorial />
           </div>
         </div>
       </div>

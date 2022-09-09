@@ -1,23 +1,36 @@
 import {List} from 'antd';
 import '../../src/App.css'
+import {useState, useEffect} from 'react';
+import axios from "axios";
 
-const data = [
-  'archivo_1',
-  'archivo_2',
-  'archivo_3',
-];
+const ListFilesAprobados = () => {
 
-const listFilesAprobados = () => {
+  let token = JSON.parse(localStorage.getItem("token"));
+
+  const [datos, setDatos]=useState([]);
+
+  const obtenerDatos=async()=>{
+    const {data}= await axios.get('/api/solicitudesAprobadas', {
+      headers:{
+        Authorization: token
+      }});
+    setDatos(data.historialRequester);
+  }
+
+  useEffect(()=>{
+    obtenerDatos();
+  },[])
+
   return (
     <>
         <List className="encabezado-lista-aprobados"
         header={<div>Datos Aprobados:</div>}
         bordered
-        dataSource={data}
-        renderItem={(item) => <List.Item className="listado">{item}</List.Item>}
+        dataSource={datos}
+        renderItem={(item) => <List.Item className="listado">Requester: {item.usuario} | Nombre: {item.nombre} | UUID: {item.UUID}</List.Item>}
         />
     </>
   )
 }
 
-export default listFilesAprobados;
+export default ListFilesAprobados;

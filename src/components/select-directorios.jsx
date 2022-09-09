@@ -7,11 +7,16 @@ const onSearch = (value) => {
 };
 
 const Selector = ({setDirectorio}) => {
+  let token = JSON.parse(localStorage.getItem("token"));
 
   const [values, setValues]=useState([]);
 
   const obtenerDirectorios=async()=>{
-    const {data}= await axios.get('/api/listDataBucket');
+    const {data}= await axios.get('/api/listDataBucket', {
+      headers:{
+        Authorization: token
+      }      
+    });
     setValues(data.Data);
   }
 
