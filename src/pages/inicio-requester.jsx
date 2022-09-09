@@ -66,7 +66,7 @@ const Inicio = () => {
               Selecciona los archivos que deseas subir al directorio
               seleccionado y solicita permisos para poder subirlos.
             </p>
-            <UploadData />
+            <UploadData directorio={directorio}/>
           </div>
         </div>
       </div>
