@@ -8,6 +8,7 @@ const onSearch = (value) => {
 
 const Selector = ({setDirectorio}) => {
   let token = JSON.parse(localStorage.getItem("token"));
+  console.log(token)
 
   const [values, setValues]=useState([]);
 
@@ -18,6 +19,7 @@ const Selector = ({setDirectorio}) => {
       }      
     });
     setValues(data.Data);
+    console.log(data.Data)
   }
 
   const onChange = (value) => {

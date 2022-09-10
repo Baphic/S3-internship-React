@@ -12,6 +12,7 @@ const { Text } = Typography;
 const InicioAdministrador = () => {
 
   const [solicitud, setSolicitud] = useState("");
+  const [idSolicitud, setIdSolicitud] = useState("")
 
   let identidad = JSON.parse(localStorage.getItem("identity"));
   let navigate = useNavigate();
@@ -52,7 +53,7 @@ const InicioAdministrador = () => {
           <div className="contenido">
             <h2>Descarga de Archivos</h2>
             <p>Descarga el archivo de la solicitud para poder verlo.</p>
-            <DownloadFiles />
+            <DownloadFiles solicitud={solicitud}/>
           </div>
         </div>
         <div className="contenedor con-download red">
@@ -61,7 +62,7 @@ const InicioAdministrador = () => {
             <p>
               Decide si aprobar o denegar la solicitud para subir los archivos.
             </p>
-            <ListFilesSolicitud />
+            <ListFilesSolicitud solicitud={solicitud}/>
           </div>
         </div>
         <div className="contenedor con-download cyan">

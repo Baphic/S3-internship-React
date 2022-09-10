@@ -17,11 +17,13 @@ const SelectSolicitudes = ({setSolicitud}) => {
       headers:{
         Authorization: token
       }});
+      console.log(data)
     setValues(data.historialRequester);
   }
 
   const onChange = (value) => {
     setSolicitud(value);
+    console.log(value)
   };
 
   useEffect(()=>{
@@ -41,7 +43,7 @@ const SelectSolicitudes = ({setSolicitud}) => {
         onChange={onChange}
         onSearch={onSearch}
         filterOption={(inputValue, option) => option.children.join('').toLowerCase().includes(inputValue.toLowerCase())}>
-        {values.map((solicitud)=><Select.Option value={solicitud._id} key={solicitud._id}>{solicitud.descripcion} | {solicitud.nombre}</Select.Option>)}
+        {values.map((solicitud)=><Select.Option value={solicitud.UUID} key={solicitud.UUID}> {solicitud.nombre} | {solicitud.descripcion} </Select.Option>)}
       </Select>
     </>
   )
