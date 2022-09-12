@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+.contenedor-1{
+    background-color: #ffffff;
+    background-image: url("../../assets/img/fondoError.png");
+    height: 47vh;
+    font-size: 35vh;
+    text-align: center;
+    padding-top: 2vh;
+    color: #a4a4a4;
+    font-family: 'Antonio', sans-serif;
+}
+
+.contenedor-2{
+    background-color: #d0d0d0;
+    padding-top: 5vh;
+    height: 53vh;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.boton-regresar{
+    background-color: #4C4C4C;
+    border-color: #4C4C4C;
+}
+
+.boton-regresar:hover{
+    background-color: #6B6B6B;
+    border-color: #6B6B6B;
+}
+
+.titulo{
+    color: #5F5F5F;
+    font-size: 8vh;
+}
+
+.parrafo{
+    color: #373737;
+    font-size: 3vh;
+    margin-top: -70px;
+}

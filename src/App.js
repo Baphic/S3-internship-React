@@ -4,6 +4,7 @@ import Inicio from './pages/inicio-requester';
 import InicioAdministrador from './pages/inicio-administrador';
 import Registro from './pages/registro';
 import Historiales from './pages/historiales';
+import Page404 from './pages/page404';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Route exact path="/inicio-admin" element={<InicioAdministrador/>} />
         <Route exact path="/registro" element={<Registro/>}/>
         <Route exact path="/historiales" element={<Historiales/>}/>
-        <Route component={Login}/>
+        <Route component={Page404}/>
       </Routes>
     </BrowserRouter>
   )
