@@ -9,6 +9,8 @@ const UploadData = ({ directorio }) => {
   const [fileList, setFileList] = useState([]);
   const [descripcion, setDescripcion] = useState("");
 
+  console.log(fileList);
+
   const uploadData = () => {
     if (!directorio) {
       Swal.fire({
@@ -34,7 +36,7 @@ const UploadData = ({ directorio }) => {
 
         if (index === fileList.length - 1) {
           formData.append("folder", directorio);
-          formData.append('descrip', descripcion);
+          formData.append("descrip", descripcion);
           axios
             .post("/api/uploadDataBucket", formData, {
               headers: {
@@ -46,12 +48,12 @@ const UploadData = ({ directorio }) => {
             })
             .then((res) => {
               setFileList([]);
-              setDescripcion("")
+              setDescripcion("");
               // window.location.reload(true)
               Swal.fire({
-                imageUrl:require('../assets/img/peepo.gif'),
-                imageWidth:'200px',
-                imageAlt:'peepo',
+                imageUrl: require("../assets/img/peepo.gif"),
+                imageWidth: "200px",
+                imageAlt: "peepo",
                 title: "Success",
                 text: "Peticion Exitosa",
               });
@@ -75,13 +77,27 @@ const UploadData = ({ directorio }) => {
         listType="picture"
         className="upload-list-inline"
         accept=".png,.jpeg,.jpg"
+        maxCount={2}
         beforeUpload={(file) => {
           setFileList([...fileList, file]);
           console.log(file);
           return false;
         }}
+        onRemove={(file) => {
+          for (let index = 0; index < fileList.length; index++) {
+            if(file.uid === fileList[index].uid){
+              const filter = fileList.filter((file)=> file.uid !== fileList[index].uid);
+              setFileList(filter);
+            }
+          }
+        }}
       >
-        <Button size="large" danger icon={<UploadOutlined />}>
+        <Button
+          disabled={fileList.length >= 20 ? true : false}
+          size="large"
+          danger
+          icon={<UploadOutlined />}
+        >
           Upload
         </Button>
       </Upload>
@@ -96,7 +112,13 @@ const UploadData = ({ directorio }) => {
       />
       <br></br>
       <br></br>
-      <Button size="large" onClick={uploadData} type="primary" danger>
+      <Button
+        disabled={fileList.length === 0 ? true : false}
+        size="large"
+        onClick={uploadData}
+        type="primary"
+        danger
+      >
         Solicitar
       </Button>
     </>

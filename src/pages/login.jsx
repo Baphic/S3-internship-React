@@ -127,12 +127,6 @@ const Login = () => {
               Iniciar Sesión
             </Button>
           </Item>
-
-          <Item>
-            <p>
-              O <a href="/registro">registrate ahora!</a>
-            </p>
-          </Item>
         </Form>
       </div>
     </div>
