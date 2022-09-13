@@ -71,7 +71,7 @@ const Inicio = () => {
       </div>
     );
   }else{
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/404"} />;
   }
 };
 

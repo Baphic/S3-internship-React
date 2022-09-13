@@ -2,8 +2,23 @@ import React from 'react'
 import { Button } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import './styles/page404.css'
+import { useNavigate } from 'react-router-dom';
 
 const Page404 = () => {
+
+  let identidad = JSON.parse(localStorage.getItem('identity'));
+  let navigate = useNavigate();
+
+  const redirect = ()=>{
+    if(identidad.rol==='Admin'){
+      navigate("/inicio-admin");
+    }else if(identidad.rol === 'Requester'){
+      navigate("/inicio-requester");
+    }else{
+      navigate("/");
+    }
+  }
+
   return (
     <>
       <div className="contenedor-1">
@@ -18,8 +33,8 @@ const Page404 = () => {
         <p className="parrafo">
           No se pudo encontrar la página que solicitaste
         </p>
-        <Button className="boton-regresar" type="primary" shape="round" href="/" icon={<HomeOutlined />} size="large">
-          Regresar al Inicio
+        <Button onClick={redirect} className="boton-regresar" type="primary" shape="round" icon={<HomeOutlined />} size="large">
+          Regresar
         </Button>
       </div>
     </>

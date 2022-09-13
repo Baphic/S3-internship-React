@@ -6,13 +6,12 @@ import ButtonHistorial from "../components/button-historiales";
 import { useNavigate, Navigate } from "react-router-dom";
 import { Typography } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
-import {useState} from 'react';
+import { useState } from "react";
 import ButtonUsuarios from "../components/button-usuarios";
 import ButtonCarpetas from "../components/button-carpetas";
 const { Text } = Typography;
 
 const InicioAdministrador = () => {
-
   const [solicitud, setSolicitud] = useState("");
 
   let identidad = JSON.parse(localStorage.getItem("identity"));
@@ -39,38 +38,40 @@ const InicioAdministrador = () => {
           </div>
         </div>
         <div className="page-body cyan-general">
-        <div className="contenedor green">
+          <div className="contenedor green">
             <div className="contenido">
               <h2>Crear Carpeta</h2>
               <p>
                 Mira los historiales de los datos que has aprobado y denegado.
               </p>
-              <ButtonCarpetas/>
+              <ButtonCarpetas />
             </div>
           </div>
           <div className="contenedor con-select orange">
             <div className="contenido">
               <h2>Solicitud</h2>
               <p>
-                Mira el listado y selecciona una solicitud para poder aprobarla o denegarla.
+                Mira el listado y selecciona una solicitud para poder aprobarla
+                o denegarla.
               </p>
-              <SelectSolicitudes setSolicitud={setSolicitud}/>
+              <SelectSolicitudes setSolicitud={setSolicitud} />
             </div>
           </div>
           <div className="contenedor con-upload blue">
             <div className="contenido">
               <h2>Descarga de Archivos</h2>
               <p>Descarga el archivo de la solicitud para poder verlo.</p>
-              <DownloadFiles solicitud={solicitud}/>
+              <DownloadFiles solicitud={solicitud} />
             </div>
           </div>
           <div className="contenedor con-download red">
             <div className="contenido">
               <h2>Aprobar o Denegar</h2>
               <p>
-                Decide si aprobar o denegar la solicitud para subir los archivos.
+                Decide si aprobar o denegar la solicitud para subir los
+                archivos.
               </p>
-              <ListFilesSolicitud solicitud={solicitud}/>
+              <ListFilesSolicitud solicitud={solicitud} />
             </div>
           </div>
           <div className="contenedor con-download cyan">
@@ -79,23 +80,21 @@ const InicioAdministrador = () => {
               <p>
                 Mira los historiales de los datos que has aprobado y denegado.
               </p>
-              <ButtonHistorial/>
+              <ButtonHistorial />
             </div>
           </div>
           <div className="contenedor violet">
             <div className="contenido">
               <h2>Usuarios</h2>
-              <p>
-                Gestiona los usuarios.
-              </p>
+              <p>Gestiona los usuarios.</p>
               <ButtonUsuarios />
             </div>
           </div>
         </div>
       </div>
     );
-  }else{
-    return <Navigate to={"/"} />;
+  } else {
+    return <Navigate to={"/404"} />;
   }
 };
 
