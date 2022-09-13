@@ -32,21 +32,31 @@
 }
 
 .button-registro{
-    background-color: violet;
-    border-color: violet
+    background-color: rgb(228, 121, 180);
+    border-color: rgb(228, 121, 180);
 }
 
 .button-registro:hover{
-    background-color: rgb(255, 141, 255);
-    border-color: rgb(255, 136, 255);
+    background-color: rgb(231, 140, 190);
+    border-color: rgb(231, 140, 190);
 }
 
 .button-carpeta{
-    background-color: rgb(122, 182, 33);
-    border-color: rgb(122, 182, 33);
+    background-color: #5DC460;
+    border-color: #5DC460;
 }
 
 .button-carpeta:hover{
-    background-color: rgb(159, 249, 24);
-    border-color: rgb(159, 249, 24);
+    background-color: #75d375;
+    border-color: #75d375;
+}
+
+.button-confirmar-registro{
+    background-color: #5DC460;
+    border-color: #5DC460;
+}
+
+.button-confirmar-registro:hover{
+    background-color: #75d375;
+    border-color: #75d375;
 }

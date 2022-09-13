@@ -127,6 +127,7 @@ const FormRegistro = () => {
 
         <Form.Item>
           <Button
+            className="button-confirmar-registro"
             disabled={
               nombre === "" ||
               apellido === "" ||
@@ -140,8 +141,9 @@ const FormRegistro = () => {
             onClick={registro}
             type="primary"
             htmlType="submit"
+            size="large"
           >
-            Submit
+            Registrar
           </Button>
         </Form.Item>
       </Form>

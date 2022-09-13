@@ -42,7 +42,7 @@ const InicioAdministrador = () => {
             <div className="contenido">
               <h2>Crear Carpeta</h2>
               <p>
-                Mira los historiales de los datos que has aprobado y denegado.
+                Crea nuevas carpetas para poder guardar datos en ellas.
               </p>
               <ButtonCarpetas />
             </div>

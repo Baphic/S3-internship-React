@@ -28,11 +28,11 @@ body{
 }
 
 .violet{
-  border-top: 3px solid violet;
+  border-top: 3px solid rgb(228, 121, 180);
 }
 
 .green{
-  border-top: 3px solid greenyellow;
+  border-top: 3px solid #5DC460;
 }
 
 .page-header { 
@@ -69,7 +69,7 @@ body{
 .btn-volver{
   background-color:  #ff7373;
   border-color: #ff7373;
-  textcolor: white;
+  color: white;
   margin-left: 20px;
 }
 

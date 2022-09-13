@@ -31,7 +31,7 @@ const Historiales = () => {
         </div>
         <div className="page-body cyan">
           <Button className="btn-volver" href="/inicio-admin" size="large" shape="round" style={{color:"#BEBEBE"}} type="primary">
-          <ArrowLeftOutlined style={{ color: "white", fontSize: "10px" }}/><Text style={{color:"white"}}>Volver</Text>
+          <ArrowLeftOutlined style={{ color: "white", fontSize: "15px" }}/><Text style={{color:"white"}}>Volver</Text>
           </Button>
           <div className="contenedor con-select blue">
             <div className="contenido">
