@@ -1,44 +1,33 @@
-import { ConsoleSqlOutlined, UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import { Button, Upload, Input } from "antd";
 import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-const UploadData = ({ directorio }) => {
+const UploadData = ({ directory }) => {
   let token = JSON.parse(localStorage.getItem("token"));
   const [fileList, setFileList] = useState([]);
-  const [descripcion, setDescripcion] = useState("");
-
-  console.log(fileList);
+  const [description, setDescription] = useState("");
 
   const uploadData = () => {
-    if (!directorio) {
+    if (!directory) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Elija un Directorio",
       });
     } else {
-      console.log(directorio);
-      console.log(fileList);
-      console.log(token);
+    
       let formData = new FormData();
-      // console.log(fileList);
-      console.log(formData);
-      // let parametros = {
-      //   file: fileList,
-      //   descrip: 'si'
-      // }
+
       for (let index = 0; index < fileList.length; index++) {
-        console.log(index);
-        console.log(fileList.length);
         formData.append("file", fileList[index]);
 
         if (index === fileList.length - 1) {
-          formData.append("folder", directorio);
-          formData.append("descrip", descripcion);
+          formData.append("folder", directory);
+          formData.append("descrip", description);
           axios
-            .post("/api/uploadDataBucket", formData, {
+            .post("/api/dataBucket", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
                 Accept: "application/json",
@@ -48,8 +37,7 @@ const UploadData = ({ directorio }) => {
             })
             .then((res) => {
               setFileList([]);
-              setDescripcion("");
-              // window.location.reload(true)
+              setDescription("");
               Swal.fire({
                 imageUrl: require("../assets/img/peepo.gif"),
                 imageWidth: "200px",
@@ -80,7 +68,6 @@ const UploadData = ({ directorio }) => {
         maxCount={2}
         beforeUpload={(file) => {
           setFileList([...fileList, file]);
-          console.log(file);
           return false;
         }}
         onRemove={(file) => {
@@ -103,10 +90,10 @@ const UploadData = ({ directorio }) => {
       </Upload>
       <br></br>
       <Input
-        placeholder="Escribe una Descripcion"
-        value={descripcion}
+        placeholder="Escribe una Descripción"
+        value={description}
         onChange={(e) => {
-          setDescripcion(e.target.value);
+          setDescription(e.target.value);
         }}
         size="large"
       />

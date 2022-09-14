@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 const Page404 = () => {
 
-  let identidad = JSON.parse(localStorage.getItem('identity'));
+  let identity = JSON.parse(localStorage.getItem('identity'));
   let navigate = useNavigate();
 
   const redirect = ()=>{
-    if(identidad.rol==='Admin'){
+    if(identity.rol==='Admin'){
       navigate("/inicio-admin");
-    }else if(identidad.rol === 'Requester'){
+    }else if(identity.rol === 'Requester'){
       navigate("/inicio-requester");
     }else{
       navigate("/");

@@ -1,34 +1,32 @@
 
 import "./styles/inicio-requester.css";
-import Selector from "../components/select-directorios";
-import UploadData from "../components/upload";
-import ListFiles from "../components/list-files";
+import SelectDirectory from "../components/SelectDirectory";
+import UploadData from "../components/UploadData";
+import ListFiles from "../components/ListFiles";
 import {useState} from 'react';
-import { Navigate, useNavigate } from "react-router-dom";
-import { Button, Typography } from "antd";
+import { Navigate } from "react-router-dom";
+import { Typography } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
-import SelectDirectorio from "../components/select-directorios";
 const { Text } = Typography;
 
-const Inicio = () => {
-  let identidad = JSON.parse(localStorage.getItem("identity"));
-  let navigate = useNavigate();
-  const [directorio, setDirectorio] = useState("");
+const HomePageRequester = () => {
+  let identity = JSON.parse(localStorage.getItem("identity"));
+  const [directory, setDirectory] = useState("");
 
-  if (identidad.rol === "Requester") {
+  if (identity.rol === "Requester") {
     return (
       <div className="general">
         <div className="page-header">
           <div className="page-log">
-            <h2 className="usuario-log">{identidad.usuario}</h2>
+            <h2 className="usuario-log">{identity.user}</h2>
             <div className="btn-logout">
-              <a className="text-logout" href="/">
+              <a className="text-logout" href="/"> 
                 {
                   <LogoutOutlined
                     style={{ color: "#BEBEBE", fontSize: "10px" }}
                   />
                 }{" "}
-                <Text style={{ color: "#BEBEBE" }}>Cerrar Sesion</Text>
+                <Text style={{ color: "#BEBEBE" }}>Cerrar Sesión</Text>
               </a>
             </div>
           </div>
@@ -44,7 +42,7 @@ const Inicio = () => {
                 Mira el listado y selecciona el directorio al que deseas entrar
                 para subir o ver archivos.
               </p>
-              <Selector setDirectorio={setDirectorio}/>
+              <SelectDirectory captureDirectory={setDirectory}/>
             </div>
           </div>
           <div className="contenedor con-download orange">
@@ -54,7 +52,7 @@ const Inicio = () => {
                 Mira el listado de los archivos que se encuentran en el directorio
                 seleccionado.
               </p>
-              <ListFiles directorio={directorio}/>
+              <ListFiles directory={directory}/>
             </div>
           </div>
           <div className="contenedor con-upload red">
@@ -64,7 +62,7 @@ const Inicio = () => {
                 Selecciona los archivos que deseas subir al directorio
                 seleccionado y solicita permisos para poder subirlos.
               </p>
-              <UploadData directorio={directorio}/>
+              <UploadData directory={directory}/>
             </div>
           </div>
         </div>
@@ -75,4 +73,4 @@ const Inicio = () => {
   }
 };
 
-export default Inicio;
+export default HomePageRequester;

@@ -3,23 +3,23 @@ import {useState, useEffect} from 'react';
 import axios from "axios";
 import '../../src/App.css'
 
-const ListFiles = ({directorio}) => {
+const ListFiles = ({directory}) => {
 
   let token = JSON.parse(localStorage.getItem("token"));
 
-  const [datos, setDatos]=useState([]);
+  const [data, setData]=useState([]);
 
-  const obtenerDatos=async()=>{
-    const {data}= await axios.get(`/api/listDataDirectorioBucket/${directorio}`, {
+  const getData=async()=>{
+    const {data}= await axios.get(`/api/dataDirectorioBucket/${directory}`, {
       headers:{
         Authorization: token
       }});
-    setDatos(data.Data);
+    setData(data.Data);
   }
 
   useEffect(()=>{
-    obtenerDatos();
-  },[directorio])
+    getData();
+  },[directory])
 
 
   return (
@@ -27,7 +27,7 @@ const ListFiles = ({directorio}) => {
         <List className="encabezado-lista"
           header={<div>Archivos del directorio:</div>}
           bordered
-          dataSource={datos}
+          dataSource={data}
           renderItem={(item) => <List.Item className="listado">{item.Key}</List.Item>}
         />
     </>

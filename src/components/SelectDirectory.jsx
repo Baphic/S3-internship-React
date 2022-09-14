@@ -1,33 +1,27 @@
 import { Select } from 'antd';
 import axios from "axios";
 import {useState, useEffect} from 'react';
-  
-const onSearch = (value) => {
-    console.log('search:', value);
-};
 
-const Selector = ({setDirectorio}) => {
+const SelectDirectory = ({captureDirectory}) => {
   let token = JSON.parse(localStorage.getItem("token"));
-  console.log(token)
 
   const [values, setValues]=useState([]);
 
-  const obtenerDirectorios=async()=>{
-    const {data}= await axios.get('/api/listDataBucket', {
+  const getDirectories=async()=>{
+    const {data}= await axios.get('/api/dataBucket', {
       headers:{
         Authorization: token
       }      
     });
     setValues(data.Data);
-    console.log(data.Data)
   }
 
   const onChange = (value) => {
-    setDirectorio(value);
+    captureDirectory(value);
   };
 
   useEffect(()=>{
-    obtenerDirectorios();
+    getDirectories();
   },[])
 
   return (
@@ -43,11 +37,9 @@ const Selector = ({setDirectorio}) => {
               width: '100%'
             }}
           onChange={onChange}
-          onSearch={onSearch}
           filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}>  
-          {values.map((directorio)=><Select.Option value={directorio.Prefix} key={directorio.Prefix}>{directorio.Prefix}</Select.Option>)}
+          {values.map((directory)=><Select.Option value={directory.Prefix} key={directory.Prefix}>{directory.Prefix}</Select.Option>)}
         </Select>
-
       : <p>Cargando...</p>
       }
     </>
@@ -55,4 +47,4 @@ const Selector = ({setDirectorio}) => {
   )
 }
 
-export default Selector;
+export default SelectDirectory;

@@ -1,7 +1,7 @@
 import "./styles/login.css";
 import axios from "axios";
 import React, { useState } from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
 import "antd/dist/antd.min.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
@@ -18,20 +18,20 @@ const Login = () => {
 
   let navigate = useNavigate();
 
-  const [usuario, setUsuario] = useState("");
+  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = Token("token", "");
-  const [identidad, setIdentidad] = Storage("identity", "");
+  const [identity, setIdentity] = Storage("identity", "");
 
   const login = () => {
-    let parametrosLogin = {
-      usuario: usuario,
+    let loginParameters = {
+      user: user,
       password: password,
       Token: "true",
     };
 
     axios
-      .post("/api/login", parametrosLogin)
+      .post("/api/login", loginParameters)
       .then((res) => {
         const Toast = Swal.mixin({
           toast: true,
@@ -46,19 +46,17 @@ const Login = () => {
         });
         Toast.fire({
           icon: "success",
-          title: "Bienvenido "+res.data.infoUser.nombre+" "+res.data.infoUser.apellido,
+          title: "Bienvenido "+res.data.infoUser.name+" "+res.data.infoUser.surname,
         });
         setToken(res.data.token);
-        setIdentidad(res.data.infoUser);
+        setIdentity(res.data.infoUser);
         if (res.data.infoUser.rol === "Admin") {
-          console.log(identidad)
           navigate("/inicio-admin");
         } else if (res.data.infoUser.rol === "Requester") {
           navigate("/inicio-requester");
         }
       })
       .catch((error) => {
-        console.log(error)
         Swal.fire({
           icon: "error",
           title: "Algo salio mal",
@@ -70,7 +68,7 @@ const Login = () => {
   return (
     <div className="contenedor-principal">
       <div className="contenedor-secundario">
-        <Form name="formulario" initialValues={{ recordar: true }}>
+        <Form name="formulario" initialValues={{ remember: true }}>
           <img
             className="imagen-principal"
             src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
@@ -78,9 +76,9 @@ const Login = () => {
           />
           <Item
             name="username"
-            value={usuario}
+            value={user}
             onChange={(e) => {
-              setUsuario(e.target.value);
+              setUser(e.target.value);
             }}
             rules={[
               {
