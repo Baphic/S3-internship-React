@@ -6,8 +6,8 @@ import "antd/dist/antd.min.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { Token } from "./token";
-import { Storage } from "./identidad";
+import { Token } from "./Token";
+import { Storage } from "./Identity";
 
 const { Item } = Form;
 const { Password } = Input;

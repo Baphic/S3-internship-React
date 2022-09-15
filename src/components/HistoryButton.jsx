@@ -2,7 +2,7 @@ import {Button} from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import '../../src/App.css'
 
-const ButtonHistorial = () => {
+const HistoryButton = () => {
   return (
     <>
         <Button className="button-historial" size="large" type="primary" href="/historiales">
@@ -12,4 +12,4 @@ const ButtonHistorial = () => {
   )
 }
 
-export default ButtonHistorial;
+export default HistoryButton;

@@ -19,7 +19,7 @@ const ListFiles = ({directory}) => {
 
   useEffect(()=>{
     getData();
-  },[directory])
+  },[directory]);
 
 
   return (

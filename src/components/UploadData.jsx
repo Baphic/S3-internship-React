@@ -1,13 +1,18 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Upload, Input } from "antd";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 const UploadData = ({ directory }) => {
   let token = JSON.parse(localStorage.getItem("token"));
   const [fileList, setFileList] = useState([]);
+  const [array,setArray] = useState([]);
   const [description, setDescription] = useState("");
+
+  useEffect(()=>{
+    
+  },[fileList])
 
   const uploadData = () => {
     if (!directory) {
@@ -17,6 +22,7 @@ const UploadData = ({ directory }) => {
         text: "Elija un Directorio",
       });
     } else {
+      setArray([])
     
       let formData = new FormData();
 
@@ -50,7 +56,7 @@ const UploadData = ({ directory }) => {
               Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response.data.mensaje,
+                text: error.response.data.message,
               });
             });
         }
@@ -63,11 +69,13 @@ const UploadData = ({ directory }) => {
       <Upload
         action="http://localhost:3000/"
         listType="picture"
+        defaultFileList={array}
         className="upload-list-inline"
         accept=".png,.jpeg,.jpg"
         maxCount={2}
         beforeUpload={(file) => {
           setFileList([...fileList, file]);
+          setArray([...array, file]);
           return false;
         }}
         onRemove={(file) => {
@@ -75,6 +83,7 @@ const UploadData = ({ directory }) => {
             if(file.uid === fileList[index].uid){
               const filter = fileList.filter((file)=> file.uid !== fileList[index].uid);
               setFileList(filter);
+              setArray(filter);
             }
           }
         }}
@@ -100,7 +109,7 @@ const UploadData = ({ directory }) => {
       <br></br>
       <br></br>
       <Button
-        disabled={fileList.length === 0 ? true : false}
+        disabled={array.length === 0 ? true : false}
         size="large"
         onClick={uploadData}
         type="primary"

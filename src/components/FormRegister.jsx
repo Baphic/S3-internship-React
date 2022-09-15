@@ -1,65 +1,79 @@
 import { Button, Form, Input, Select } from "antd";
-import { EyeOutlined } from "@ant-design/icons";
 import "../../src/App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 const { Option } = Select;
 
-const FormRegistro = () => {
+const FormRegister = () => {
   let token = JSON.parse(localStorage.getItem("token"));
 
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
+  const [form] = Form.useForm();
+
+  const [name, setName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [usuario, setUsuario] = useState("");
+  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [rol, setRol] = useState("");
 
+  const cleanForm = ()=>{
+    form.resetFields()
+  }
+
   const handleChange = (value) => {
     setRol(value);
-    console.log(rol);
   };
 
-  const registro = () => {
-    let parametros = {
-      nombre: nombre,
-      apellido: apellido,
-      usuario: usuario,
+  const register = () => {
+    let params = {
+      name: name,
+      surname: lastname,
+      user: user,
       email: email,
       password: password,
       rol: rol,
     };
 
-    console.log(parametros);
-
     axios
-      .post("/api/registro", parametros, { headers: { Authorization: token } })
+      .post("/api/register", params, { headers: { Authorization: token } })
       .then((res) => {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Usuario " + res.data.Usuario.usuario + " Creado",
+          text: "Usuario " + res.data.user.user + " Creado",
         });
+        setName("");
+        setEmail("");
+        setLastName("");
+        setPassword("");
+        setRol("");
+        setUser("");
       })
       .catch((error) => {
         Swal.fire({
           icon: "error",
           title: "Algo salio mal",
-          text: error.response.data.mensaje,
+          text: error.response.data.message,
         });
       });
   };
 
   return (
     <>
-      <Form name="basic" initialValues={{ remember: true }} autoComplete="off">
+      <Form
+      form={form}
+        name="basic"
+        initialValues={{ remember: false }}
+        onFinish={cleanForm}
+        autoComplete="off"
+      >
         <Form.Item
           label="Nombre"
           name="name"
-          value={nombre}
+          value={name}
           onChange={(e) => {
-            setNombre(e.target.value);
+            setName(e.target.value);
           }}
           rules={[{ required: true, message: "Ingresa tu nombre" }]}
         >
@@ -69,9 +83,9 @@ const FormRegistro = () => {
         <Form.Item
           label="Apellido"
           name="lastname"
-          value={apellido}
+          value={lastname}
           onChange={(e) => {
-            setApellido(e.target.value);
+            setLastName(e.target.value);
           }}
           rules={[{ required: true, message: "Ingresa tu apellido" }]}
         >
@@ -85,7 +99,9 @@ const FormRegistro = () => {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
-          rules={[{ required: true, message: "Ingresa tu correo" }]}
+          rules={[
+            { required: true, message: "Ingresa tu correo", type: "email" },
+          ]}
         >
           <Input />
         </Form.Item>
@@ -93,9 +109,9 @@ const FormRegistro = () => {
         <Form.Item
           label="Usuario"
           name="username"
-          value={usuario}
+          value={user}
           onChange={(e) => {
-            setUsuario(e.target.value);
+            setUser(e.target.value);
           }}
           rules={[{ required: true, message: "Ingresa tu usuario" }]}
         >
@@ -129,16 +145,16 @@ const FormRegistro = () => {
           <Button
             className="button-confirmar-registro"
             disabled={
-              nombre === "" ||
-              apellido === "" ||
+              name === "" ||
+              lastname === "" ||
               email === "" ||
-              usuario === "" ||
+              user === "" ||
               password === "" ||
               rol === ""
                 ? true
                 : false
             }
-            onClick={registro}
+            onClick={register}
             type="primary"
             htmlType="submit"
             size="large"
@@ -151,4 +167,4 @@ const FormRegistro = () => {
   );
 };
 
-export default FormRegistro;
+export default FormRegister;

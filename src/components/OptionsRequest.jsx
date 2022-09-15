@@ -4,18 +4,14 @@ import "../../src/App.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const ListSolicitudFiles = ({ solicitud }) => {
+const OptionsRequest = ({ request,setRequest }) => {
   let token = JSON.parse(localStorage.getItem("token"));
-  let data = solicitud.split("/");
-
+  let data = request.split("/");
   let folder = data[0];
   let file = data[1];
-  let parametros = {
-    idSo: solicitud,
-  };
-  console.log(solicitud);
 
-  const aprobar = () => {
+
+  const approve = () => {
     axios
       .put(`/api/approveRequest/${folder}/${file}`)
       .then((res) => {
@@ -24,19 +20,18 @@ const ListSolicitudFiles = ({ solicitud }) => {
           title: "Success",
           text: "Solicitud Aceptada",
         });
+        setRequest("");
       })
       .catch((error) => {
-        console.log(token);
-        console.log(error);
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: error.response.data.mensaje,
+          text: error.response.data.message,
         });
       });
   };
 
-  const denegar = () => {
+  const deny = () => {
     axios
       .put(`/api/denyRequest/${folder}/${file}`)
       .then((res) => {
@@ -45,12 +40,13 @@ const ListSolicitudFiles = ({ solicitud }) => {
           title: "Success",
           text: "Solicitud Denegada",
         });
+        setRequest("");
       })
       .catch((error) => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: error.response.data.mensaje,
+          text: error.response.data.message,
         });
       });
   };
@@ -58,21 +54,21 @@ const ListSolicitudFiles = ({ solicitud }) => {
   return (
     <>
       <Button
-        disabled={!solicitud ? true : false}
+        disabled={!request ? true : false}
         default
         className="boton-lista-solicitud verde"
-        onClick={aprobar}
+        onClick={approve}
         size="large"
         type="primary"
       >
         <CheckCircleOutlined /> Aprobar
       </Button>
       <Button
-        disabled={!solicitud ? true : false}
+        disabled={!request ? true : false}
         danger
         className="boton-lista-solicitud"
         size="large"
-        onClick={denegar}
+        onClick={deny}
         type="primary"
       >
         <CloseCircleOutlined /> Denegar
@@ -81,4 +77,4 @@ const ListSolicitudFiles = ({ solicitud }) => {
   );
 };
 
-export default ListSolicitudFiles;
+export default OptionsRequest;

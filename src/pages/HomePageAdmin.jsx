@@ -1,27 +1,26 @@
 import "./styles/inicio-requester.css";
-import SelectSolicitudes from "../components/select-solicitudes";
-import DownloadFiles from "../components/download-files";
-import ListFilesSolicitud from "../components/list-solicitud-files";
-import ButtonHistorial from "../components/button-historiales";
-import { useNavigate, Navigate } from "react-router-dom";
+import SelectRequest from "../components/SelectRequest";
+import DownloadFiles from "../components/DownloadFIle";
+import OptionsRequest from "../components/OptionsRequest";
+import HistoryButton from "../components/HistoryButton";
+import { Navigate } from "react-router-dom";
 import { Typography } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import ButtonUsuarios from "../components/button-usuarios";
-import ButtonCarpetas from "../components/button-carpetas";
+import UserButton from "../components/UsersButton";
+import FolderButton from "../components/FolderButton";
 const { Text } = Typography;
 
-const InicioAdministrador = () => {
-  const [solicitud, setSolicitud] = useState("");
+const HomePageAdmin = () => {
+  const [request, setRequest] = useState("");
 
-  let identidad = JSON.parse(localStorage.getItem("identity"));
-  let navigate = useNavigate();
-  if (identidad.rol === "Admin") {
+  let identity = JSON.parse(localStorage.getItem("identity"));
+  if (identity.rol === "Admin") {
     return (
       <div className="general">
         <div className="page-header">
           <div className="page-log">
-            <h2 className="usuario-log">{identidad.usuario}</h2>
+            <h2 className="usuario-log">{identity.user}</h2>
             <div className="btn-logout">
               <a className="text-logout" href="/">
                 {
@@ -44,7 +43,7 @@ const InicioAdministrador = () => {
               <p>
                 Crea nuevas carpetas para poder guardar datos en ellas.
               </p>
-              <ButtonCarpetas />
+              <FolderButton />
             </div>
           </div>
           <div className="contenedor con-select orange">
@@ -54,14 +53,14 @@ const InicioAdministrador = () => {
                 Mira el listado y selecciona una solicitud para poder aprobarla
                 o denegarla.
               </p>
-              <SelectSolicitudes setSolicitud={setSolicitud} />
+              <SelectRequest setRequest={setRequest} request={request} />
             </div>
           </div>
           <div className="contenedor con-upload blue">
             <div className="contenido">
               <h2>Descarga de Archivos</h2>
               <p>Descarga el archivo de la solicitud para poder verlo.</p>
-              <DownloadFiles solicitud={solicitud} />
+              <DownloadFiles request={request} />
             </div>
           </div>
           <div className="contenedor con-download red">
@@ -71,7 +70,7 @@ const InicioAdministrador = () => {
                 Decide si aprobar o denegar la solicitud para subir los
                 archivos.
               </p>
-              <ListFilesSolicitud solicitud={solicitud} />
+              <OptionsRequest request={request} setRequest={setRequest} />
             </div>
           </div>
           <div className="contenedor con-download cyan">
@@ -80,14 +79,14 @@ const InicioAdministrador = () => {
               <p>
                 Mira los historiales de los datos que has aprobado y denegado.
               </p>
-              <ButtonHistorial />
+              <HistoryButton />
             </div>
           </div>
           <div className="contenedor violet">
             <div className="contenido">
               <h2>Usuarios</h2>
               <p>Gestiona los usuarios.</p>
-              <ButtonUsuarios />
+              <UserButton />
             </div>
           </div>
         </div>
@@ -98,4 +97,4 @@ const InicioAdministrador = () => {
   }
 };
 
-export default InicioAdministrador;
+export default HomePageAdmin;

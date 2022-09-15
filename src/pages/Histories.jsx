@@ -1,19 +1,19 @@
 import "./styles/inicio-requester.css";
-import ListFilesAprobados from "../components/list-files-aprobados";
-import ListFilesDenegados from "../components/list-files-denegados";
+import ApprovedFiles from "../components/ApprovedFiles";
+import DennyFiles from "../components/DeniedFiles";
 import { Navigate } from "react-router-dom";
 import { ArrowLeftOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
 const { Text } = Typography;
 
 const Historiales = () => {
-  let identidad = JSON.parse(localStorage.getItem("identity"));
-  if (identidad.rol === "Admin") {
+  let identity = JSON.parse(localStorage.getItem("identity"));
+  if (identity.rol === "Admin") {
     return (
       <div className="general">
         <div className="page-header">
           <div className="page-log">
-            <h2 className="usuario-log">{identidad.usuario}</h2>
+            <h2 className="usuario-log">{identity.user}</h2>
             <div className="btn-logout">
               <a className="text-logout" href="/">
                 {
@@ -40,7 +40,7 @@ const Historiales = () => {
                 Mira el historial de los datos que han sido aprobados mediante la
                 solicitud de algún requester.
               </p>
-              <ListFilesAprobados />
+              <ApprovedFiles />
             </div>
           </div>
           <div className="contenedor con-download red">
@@ -50,7 +50,7 @@ const Historiales = () => {
                 Mira el historial de los datos que han sido denegados mediante la
                 solicitud de algún requester.
               </p>
-              <ListFilesDenegados />
+              <DennyFiles />
             </div>
           </div>
         </div>

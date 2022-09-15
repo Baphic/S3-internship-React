@@ -12,55 +12,19 @@ import {
 } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router-dom";
-import FormRegistro from "../components/form-registro";
+import FormRegister from "../components/FormRegister";
 const { Text } = Typography;
 
-const Registro = () => {
-  let identidad = JSON.parse(localStorage.getItem("identity"));
-
-  let navigate = useNavigate();
-
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [usuario, setUsuario] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const registro = () => {
-    let parametrosRegistro = {
-      nombre: nombre,
-      apellido: apellido,
-      usuario: usuario,
-      email: email,
-      password: password,
-    };
-
-    axios
-      .post("/api/registro", parametrosRegistro)
-      .then((res) => {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Usuario registrado correctamente",
-        });
-        navigate("/");
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Algo salio mal",
-          text: error.response.data.mensaje,
-        });
-      });
-  };
-
-  if (identidad.rol === "Admin") {
+const Register = () => {
+  let identity = JSON.parse(localStorage.getItem("identity"));
+  
+  if (identity.rol === "Admin") {
     return (
       <>
         <div className="general">
           <div className="page-header">
             <div className="page-log">
-              <h2 className="usuario-log">{identidad.usuario}</h2>
+              <h2 className="usuario-log">{identity.user}</h2>
               <div className="btn-logout">
                 <a className="text-logout" href="/">
                   {
@@ -91,7 +55,7 @@ const Registro = () => {
             <div className="contenedor green">
               <div className="contenido">
                 <h2>Registrar Usuario</h2>
-                <FormRegistro />
+                <FormRegister />
               </div>
             </div>
           </div>
@@ -103,4 +67,4 @@ const Registro = () => {
   }
 };
 
-export default Registro;
+export default Register;

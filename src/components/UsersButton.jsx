@@ -2,7 +2,7 @@ import {Button} from 'antd';
 import { EyeOutlined, UserOutlined } from '@ant-design/icons';
 import '../../src/App.css'
 
-const ButtonUsuarios = () => {
+const UserButton = () => {
   return (
     <>
         <Button className="button-registro" size="large" type="primary" href="/registro">
@@ -12,4 +12,4 @@ const ButtonUsuarios = () => {
   )
 }
 
-export default ButtonUsuarios;
+export default UserButton;
