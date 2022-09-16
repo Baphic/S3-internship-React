@@ -24,15 +24,13 @@ const SelectRequest = ({ setRequest, request }) => {
 
   useEffect(() => {
     requests();
-  }, [request]);
+  }, []);
 
   return (
     <>
-      {values.length > 0 ? (
         <Select
           size="large"
           showSearch
-          defaultValue={request}
           placeholder="Seleecciona una solicitud"
           optionFilterProp="children"
           style={{
@@ -54,9 +52,6 @@ const SelectRequest = ({ setRequest, request }) => {
             </Select.Option>
           ))}
         </Select>
-      ) : (
-        <p>No hay solicitudes por el momento...</p>
-      )}
     </>
   );
 };

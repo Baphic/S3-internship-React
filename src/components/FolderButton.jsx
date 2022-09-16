@@ -23,7 +23,7 @@ const FolderButton = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Simbolo / no valido",
+        text: 'Símbolo '+'" / "'+' no válido',
       });
     } else {
       axios

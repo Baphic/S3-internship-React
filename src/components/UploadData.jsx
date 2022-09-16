@@ -1,14 +1,16 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Upload, Input } from "antd";
+import { Button, Upload, Input, Modal } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+
 
 const UploadData = ({ directory }) => {
   let token = JSON.parse(localStorage.getItem("token"));
   const [fileList, setFileList] = useState([]);
   const [array, setArray] = useState([]);
   const [description, setDescription] = useState("");
+
 
   useEffect(() => {}, [fileList]);
 
@@ -46,8 +48,8 @@ const UploadData = ({ directory }) => {
                 imageUrl: require("../assets/img/peepo.gif"),
                 imageWidth: "200px",
                 imageAlt: "peepo",
-                title: "Success",
-                text: "Peticion Exitosa",
+                title: "Operacíon exitosa",
+                text: "Archivo/s cargado exitosamente",
               });
             })
             .catch((error) => {
@@ -66,8 +68,8 @@ const UploadData = ({ directory }) => {
     <>
       <Upload
         action="http://localhost:3000/"
+        fileList={fileList}
         listType="picture"
-        defaultFileList={array}
         className="upload-list-inline"
         accept=".png,.jpeg,.jpg"
         maxCount={2}
@@ -94,7 +96,7 @@ const UploadData = ({ directory }) => {
           danger
           icon={<UploadOutlined />}
         >
-          Upload
+          Cargar
         </Button>
       </Upload>
       <br></br>

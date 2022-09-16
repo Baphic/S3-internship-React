@@ -15,7 +15,7 @@ const OptionsRequest = ({ request, setRequest }) => {
       .then((res) => {
         Swal.fire({
           icon: "success",
-          title: "Success",
+          title: "Operacíon exitosa",
           text: "Solicitud Aceptada",
         });
         setRequest("");
@@ -35,7 +35,7 @@ const OptionsRequest = ({ request, setRequest }) => {
       .then((res) => {
         Swal.fire({
           icon: "success",
-          title: "Success",
+          title: "Operacíon exitosa",
           text: "Solicitud Denegada",
         });
         setRequest("");

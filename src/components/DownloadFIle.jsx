@@ -4,12 +4,10 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const DownloadFiles = ({ request }) => {
-
   let token = JSON.parse(localStorage.getItem("token"));
   let data = request.split("/");
   let folder = data[0];
   let file = data[1];
-
 
   const downloadFiles = () => {
     axios
@@ -23,8 +21,8 @@ const DownloadFiles = ({ request }) => {
           imageUrl: require("../assets/img/peepo.gif"),
           imageWidth: "200px",
           imageAlt: "peepo",
-          title: "Success",
-          text: "Peticion Exitosa",
+          title: "Operacíon exitosa",
+          text: "Archivo descargado exitosamente",
         });
         const link = document.createElement("a");
         link.href = res.data.download;
@@ -50,7 +48,7 @@ const DownloadFiles = ({ request }) => {
         icon={<DownloadOutlined />}
         disabled={!request ? true : false}
       >
-        Download
+        Descargar
       </Button>
     </>
   );

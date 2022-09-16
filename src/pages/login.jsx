@@ -63,7 +63,7 @@ const Login = () => {
         Swal.fire({
           icon: "error",
           title: "Algo salio mal",
-          text: error.response.data.mensaje,
+          text: error.response.data.message,
         });
       });
   };

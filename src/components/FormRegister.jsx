@@ -40,8 +40,8 @@ const FormRegister = () => {
       .then((res) => {
         Swal.fire({
           icon: "success",
-          title: "Success",
-          text: "Usuario " + res.data.user.user + " Creado",
+          title: "Operacíon exitosa",
+          text: `Usuario "${res.data.user.user}" creado`,
         });
         setName("");
         setEmail("");
