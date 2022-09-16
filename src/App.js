@@ -4,7 +4,7 @@ import HomePageRequester from './pages/HomePageRequester';
 import HomePageAdmin from './pages/HomePageAdmin';
 import Register from './pages/Register';
 import Histories from './pages/Histories';
-import Page404 from './pages/Page404';
+import Page404 from './pages/404';
 
 function App() {
   return (
