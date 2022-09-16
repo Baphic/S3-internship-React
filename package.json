@@ -1,3 +1,4 @@
+
 {
   "name": "s3-internship-react",
   "version": "0.1.0",
@@ -7,6 +8,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "dotenv": "^16.0.2",
     "antd": "^4.22.8",
     "axios": "^0.27.2",
     "react": "^18.2.0",
@@ -40,5 +42,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:7778/"
+  "proxy": "https://internship-s3.herokuapp.com/"
 }

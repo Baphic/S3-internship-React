@@ -24,7 +24,7 @@ const SelectRequest = ({ setRequest, request }) => {
 
   useEffect(() => {
     requests();
-  }, []);
+  }, [request]);
 
   return (
     <>

@@ -27,7 +27,7 @@ const DennyFiles = () => {
         header={<div>Datos Denegados:</div>}
         bordered
         dataSource={value}
-        renderItem={(item) => <List.Item className="list">Requester: {item.user} | Nombre: {item.name} | UUID: {item.UUID}</List.Item>}
+        renderItem={(item) => <List.Item className="list">Requester: {item.user} | Nombre: {item.name} | Descripción: {item.description}</List.Item>}
         />
     </>
   )
