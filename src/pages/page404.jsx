@@ -1,45 +1,46 @@
-import React from 'react'
-import { Button } from 'antd';
-import { HomeOutlined } from '@ant-design/icons';
-import './styles/page404.css'
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Button } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
+import "./styles/page404.css";
+import { useNavigate } from "react-router-dom";
 
 const Page404 = () => {
-
-  let identity = JSON.parse(localStorage.getItem('identity'));
+  let identity = JSON.parse(localStorage.getItem("identity"));
   let navigate = useNavigate();
 
-  const redirect = ()=>{
-    if(identity.rol==='Admin'){
+  const redirect = () => {
+    if (identity.rol === "Admin") {
       navigate("/inicio-admin");
-    }else if(identity.rol === 'Requester'){
+    } else if (identity.rol === "Requester") {
       navigate("/inicio-requester");
-    }else{
+    } else {
       navigate("/");
     }
-  }
+  };
 
   return (
     <>
-      <div className="contenedor-1">
-        <p>
-          404
-        </p>
+      <div className="container-1">
+        <p>404</p>
       </div>
-      <div className="contenedor-2">
-        <p className="titulo">
-          Página no encontrada
-        </p>
-        <p className="parrafo">
+      <div className="container-2">
+        <p className="title">Página no encontrada</p>
+        <p className="paragraph">
           No se pudo encontrar la página que solicitaste
         </p>
-        <Button onClick={redirect} className="boton-regresar" type="primary" shape="round" icon={<HomeOutlined />} size="large">
+        <Button
+          onClick={redirect}
+          className="button-return"
+          type="primary"
+          shape="round"
+          icon={<HomeOutlined />}
+          size="large"
+        >
           Regresar
         </Button>
       </div>
     </>
-   
-  )
-}
+  );
+};
 
 export default Page404;

@@ -50,7 +50,7 @@ const SelectRequest = ({ setRequest, request }) => {
           {values.map((request) => (
             <Select.Option value={request.UUID} key={request.UUID}>
               {" "}
-              {request.name} | {request.description}{" "}
+              {request.description} | {request.name}{" "}
             </Select.Option>
           ))}
         </Select>

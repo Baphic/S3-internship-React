@@ -23,11 +23,11 @@ const ApprovedFiles = () => {
 
   return (
     <>
-        <List className="encabezado-lista-aprobados"
+        <List className="approved-list-header"
         header={<div>Datos Aprobados:</div>}
         bordered
         dataSource={value}
-        renderItem={(item) => <List.Item className="listado">Requester: {item.user} | Nombre: {item.name} | UUID: {item.UUID}</List.Item>}
+        renderItem={(item) => <List.Item className="list">Requester: {item.user} | Nombre: {item.name} | UUID: {item.UUID}</List.Item>}
         />
     </>
   )

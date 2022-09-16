@@ -1,50 +1,56 @@
-import { Select } from 'antd';
+import { Select } from "antd";
 import axios from "axios";
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
 
-const SelectDirectory = ({captureDirectory}) => {
+const SelectDirectory = ({ captureDirectory }) => {
   let token = JSON.parse(localStorage.getItem("token"));
 
-  const [values, setValues]=useState([]);
+  const [values, setValues] = useState([]);
 
-  const getDirectories=async()=>{
-    const {data}= await axios.get('/api/dataBucket', {
-      headers:{
-        Authorization: token
-      }      
+  const getDirectories = async () => {
+    const { data } = await axios.get("/api/dataBucket", {
+      headers: {
+        Authorization: token,
+      },
     });
     setValues(data.Data);
-  }
+  };
 
   const onChange = (value) => {
     captureDirectory(value);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getDirectories();
-  },[])
+  }, []);
 
   return (
     <>
-      {values.length > 0 ?
-
+      {values.length > 0 ? (
         <Select
           size="large"
           showSearch
           placeholder="Seleecciona un directorio"
           optionFilterProp="children"
           style={{
-              width: '100%'
-            }}
+            width: "100%",
+          }}
           onChange={onChange}
-          filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}>  
-          {values.map((directory)=><Select.Option value={directory.Prefix} key={directory.Prefix}>{directory.Prefix}</Select.Option>)}
+          filterOption={(input, option) =>
+            option.children.toLowerCase().includes(input.toLowerCase())
+          }
+        >
+          {values.map((directory) => (
+            <Select.Option value={directory.Prefix} key={directory.Prefix}>
+              {directory.Prefix}
+            </Select.Option>
+          ))}
         </Select>
-      : <p>Cargando...</p>
-      }
+      ) : (
+        <p>Cargando...</p>
+      )}
     </>
-  
-  )
-}
+  );
+};
 
 export default SelectDirectory;

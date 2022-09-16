@@ -1,62 +1,62 @@
-.listado {
+.list {
     background-color: #fafafa;
 }
 
-.encabezado-lista {
+.header-list {
     background-color: #ffc478e3;
     font-size: 16px;
 }
 
-.boton-lista-solicitud{
+.button-list-request{
     margin: 20px 6px;
 }
 
-.encabezado-lista-aprobados {
+.approved-list-header {
     background-color: #78a7ffb3;
     font-size: 16px;
 }
 
-.encabezado-lista-denegados {
+.deny-list-header {
     background-color: #ff7878a8;
     font-size: 16px;
 }
 
-.button-historial {
+.button-history {
     background-color: #1fbbbb;
     border-color: #1fbbbb;
 }
 
-.button-historial:hover {
+.button-history:hover {
     background-color: #45D3D3;
     border-color: #45D3D3;
 }
 
-.button-registro{
+.button-register{
     background-color: rgb(228, 121, 180);
     border-color: rgb(228, 121, 180);
 }
 
-.button-registro:hover{
+.button-register:hover{
     background-color: rgb(231, 140, 190);
     border-color: rgb(231, 140, 190);
 }
 
-.button-carpeta{
+.button-folder{
     background-color: #5DC460;
     border-color: #5DC460;
 }
 
-.button-carpeta:hover{
+.button-folder:hover{
     background-color: #75d375;
     border-color: #75d375;
 }
 
-.button-confirmar-registro{
+.button-confirm-register{
     background-color: #5DC460;
     border-color: #5DC460;
 }
 
-.button-confirmar-registro:hover{
+.button-confirm-register:hover{
     background-color: #75d375;
     border-color: #75d375;
 }

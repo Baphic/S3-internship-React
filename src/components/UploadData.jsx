@@ -7,12 +7,10 @@ import Swal from "sweetalert2";
 const UploadData = ({ directory }) => {
   let token = JSON.parse(localStorage.getItem("token"));
   const [fileList, setFileList] = useState([]);
-  const [array,setArray] = useState([]);
+  const [array, setArray] = useState([]);
   const [description, setDescription] = useState("");
 
-  useEffect(()=>{
-    
-  },[fileList])
+  useEffect(() => {}, [fileList]);
 
   const uploadData = () => {
     if (!directory) {
@@ -22,8 +20,8 @@ const UploadData = ({ directory }) => {
         text: "Elija un Directorio",
       });
     } else {
-      setArray([])
-    
+      setArray([]);
+
       let formData = new FormData();
 
       for (let index = 0; index < fileList.length; index++) {
@@ -80,8 +78,10 @@ const UploadData = ({ directory }) => {
         }}
         onRemove={(file) => {
           for (let index = 0; index < fileList.length; index++) {
-            if(file.uid === fileList[index].uid){
-              const filter = fileList.filter((file)=> file.uid !== fileList[index].uid);
+            if (file.uid === fileList[index].uid) {
+              const filter = fileList.filter(
+                (file) => file.uid !== fileList[index].uid
+              );
               setFileList(filter);
               setArray(filter);
             }

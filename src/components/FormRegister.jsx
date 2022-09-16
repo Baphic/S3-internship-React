@@ -1,6 +1,6 @@
 import { Button, Form, Input, Select } from "antd";
 import "../../src/App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 const { Option } = Select;
@@ -17,9 +17,9 @@ const FormRegister = () => {
   const [password, setPassword] = useState("");
   const [rol, setRol] = useState("");
 
-  const cleanForm = ()=>{
-    form.resetFields()
-  }
+  const cleanForm = () => {
+    form.resetFields();
+  };
 
   const handleChange = (value) => {
     setRol(value);
@@ -62,7 +62,7 @@ const FormRegister = () => {
   return (
     <>
       <Form
-      form={form}
+        form={form}
         name="basic"
         initialValues={{ remember: false }}
         onFinish={cleanForm}
@@ -143,7 +143,7 @@ const FormRegister = () => {
 
         <Form.Item>
           <Button
-            className="button-confirmar-registro"
+            className="button-confirm-register"
             disabled={
               name === "" ||
               lastname === "" ||

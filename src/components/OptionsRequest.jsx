@@ -4,12 +4,10 @@ import "../../src/App.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const OptionsRequest = ({ request,setRequest }) => {
-  let token = JSON.parse(localStorage.getItem("token"));
+const OptionsRequest = ({ request, setRequest }) => {
   let data = request.split("/");
   let folder = data[0];
   let file = data[1];
-
 
   const approve = () => {
     axios
@@ -56,7 +54,7 @@ const OptionsRequest = ({ request,setRequest }) => {
       <Button
         disabled={!request ? true : false}
         default
-        className="boton-lista-solicitud verde"
+        className="button-list-request verde"
         onClick={approve}
         size="large"
         type="primary"
@@ -66,7 +64,7 @@ const OptionsRequest = ({ request,setRequest }) => {
       <Button
         disabled={!request ? true : false}
         danger
-        className="boton-lista-solicitud"
+        className="button-list-request"
         size="large"
         onClick={deny}
         type="primary"

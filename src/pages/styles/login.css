@@ -1,4 +1,4 @@
-.contenedor-principal {
+.main-container {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -9,11 +9,11 @@
     box-shadow: rgba(6, 94, 161, 0.4) 10px 10px;
   }
   
-.contenedor-secundario {
+.secondary-container {
     text-align: center;
 }
   
-.imagen-principal {
+.main-image {
     margin-bottom: 30px;
     border-radius: 50%;
     width: 200px;

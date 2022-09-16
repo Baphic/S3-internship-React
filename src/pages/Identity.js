@@ -15,7 +15,6 @@ export const Storage = (key,initialValue)=>{
             setStorageValue(value)
             localStorage.setItem(key, JSON.stringify(value))
         }catch(error){
-            console.error(error)
         }
     }
 

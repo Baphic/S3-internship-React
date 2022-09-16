@@ -1,15 +1,20 @@
-import {Button} from 'antd';
-import { EyeOutlined, UserOutlined } from '@ant-design/icons';
-import '../../src/App.css'
+import { Button } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import "../../src/App.css";
 
-const UserButton = () => {
+const UsersButton = () => {
   return (
     <>
-        <Button className="button-registro" size="large" type="primary" href="/registro">
-            <UserOutlined /> Usuarios
-        </Button>
+      <Button
+        className="button-register"
+        size="large"
+        type="primary"
+        href="/registro"
+      >
+        <UserOutlined /> Usuarios
+      </Button>
     </>
-  )
-}
+  );
+};
 
-export default UserButton;
+export default UsersButton;

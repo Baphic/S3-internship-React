@@ -1,5 +1,5 @@
 import { Button, Input } from "antd";
-import { EyeOutlined, FolderAddOutlined } from "@ant-design/icons";
+import { FolderAddOutlined } from "@ant-design/icons";
 import "../../src/App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -10,44 +10,39 @@ const FolderButton = () => {
 
   const [folder, setFolder] = useState("");
 
-  useEffect(()=>{
-    
-  },[])
-
+  useEffect(() => {}, []);
 
   const addFolder = () => {
-
     let folder2 = folder.trim();
-    folder2 = folder2.replace(/\s+/g, '_');
-    console.log(folder2)
+    folder2 = folder2.replace(/\s+/g, "_");
     let params = {
       name: folder2,
     };
 
-    if(folder.match("/")){
+    if (folder.match("/")) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: 'Simbolo / no valido',
+        text: "Simbolo / no valido",
       });
-    }else{
+    } else {
       axios
-      .post("/api/folder", params, { headers: { Authorization: token } })
-      .then((res) => {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Carpeta " + folder + " Creada",
+        .post("/api/folder", params, { headers: { Authorization: token } })
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Carpeta " + folder + " Creada",
+          });
+          setFolder("");
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.response.data.message,
+          });
         });
-        setFolder("");
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: error.response.data.message,
-        });
-      });
     }
   };
 
@@ -63,7 +58,13 @@ const FolderButton = () => {
       />
       <br></br>
       <br></br>
-      <Button disabled={folder===''?true:false} className="button-carpeta" onClick={addFolder} size="large" type="primary">
+      <Button
+        disabled={folder === "" ? true : false}
+        className="button-folder"
+        onClick={addFolder}
+        size="large"
+        type="primary"
+      >
         <FolderAddOutlined />
         Crear Carpeta
       </Button>

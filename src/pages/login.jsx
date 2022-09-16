@@ -13,7 +13,6 @@ const { Item } = Form;
 const { Password } = Input;
 
 const Login = () => {
-
   localStorage.clear();
 
   let navigate = useNavigate();
@@ -46,7 +45,11 @@ const Login = () => {
         });
         Toast.fire({
           icon: "success",
-          title: "Bienvenido "+res.data.infoUser.name+" "+res.data.infoUser.surname,
+          title:
+            "Bienvenido " +
+            res.data.infoUser.name +
+            " " +
+            res.data.infoUser.surname,
         });
         setToken(res.data.token);
         setIdentity(res.data.infoUser);
@@ -60,19 +63,19 @@ const Login = () => {
         Swal.fire({
           icon: "error",
           title: "Algo salio mal",
-          text: error.response.data.mensaje
+          text: error.response.data.mensaje,
         });
       });
   };
 
   return (
-    <div className="contenedor-principal">
-      <div className="contenedor-secundario">
+    <div className="main-container">
+      <div className="secondary-container">
         <Form name="formulario" initialValues={{ remember: true }}>
           <img
-            className="imagen-principal"
+            className="main-image"
             src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
-            alt="imagen-login"
+            alt="loginImage"
           />
           <Item
             name="username"

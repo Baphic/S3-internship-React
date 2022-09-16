@@ -15,7 +15,6 @@ export const Token = (key,initialValue)=>{
             setStoredValue(value)
             localStorage.setItem(key, JSON.stringify(value))
         }catch(error){
-            console.error(error)
         }
     }
 
